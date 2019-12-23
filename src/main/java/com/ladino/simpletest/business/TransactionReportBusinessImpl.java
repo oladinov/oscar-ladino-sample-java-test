@@ -133,8 +133,7 @@ public class TransactionReportBusinessImpl implements TransactionReportBusiness 
     LocalDate friday = d.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY));
     LocalDate firstDayOfMonth = d.withDayOfMonth(1);
 
-    return friday.with(TemporalAdjusters.firstDayOfMonth()).isBefore(firstDayOfMonth)
-        ? firstDayOfMonth : friday;
+    return friday.isBefore(firstDayOfMonth) ? firstDayOfMonth : friday;
   }
 
     /**
