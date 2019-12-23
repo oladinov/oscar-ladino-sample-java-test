@@ -12,16 +12,17 @@ import java.util.Optional;
 @Component
 public interface TransactionRepository extends MongoRepository<Transaction, String> {
 
-    List<Transaction> findByUserId(Integer userId);
+  List<Transaction> findByUserId(Integer userId);
 
-    Optional<Transaction> findByTransactionIdAndUserId(String id, Integer userId);
+  Optional<Transaction> findByTransactionIdAndUserId(String id, Integer userId);
 
-    /*
-    I made this method to perform the sum. But then read again the description of the assessment and re made it
-     in the business class.
+  /*
+  I made this method to perform the sum. But then read again the description of the assessment and re made it
+   in the business class.
 
-    Left this method to show my first approach to it, which is still a valid way, just not what this exercise requires.
-     */
-    @Aggregation(pipeline = { "{ $match : { userId : ?0 } } " , "{ $group: { \"_id\" : ?0, total: { $sum: \"$amount\"} } } " } )
-    TransactionSum sumTransactionsByUser(Integer userId);
+  Left this method to show my first approach to it, which is still a valid way, just not what this exercise requires.
+   */
+  @Aggregation(pipeline = {"{ $match : { userId : ?0 } } ",
+      "{ $group: { \"_id\" : ?0, total: { $sum: \"$amount\"} } } "})
+  TransactionSum sumTransactionsByUser(Integer userId);
 }

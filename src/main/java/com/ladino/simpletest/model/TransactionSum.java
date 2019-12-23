@@ -9,9 +9,10 @@ import lombok.Data;
 @Builder
 @ApiModel(value = "Transaction Sum", description = "Defines the sum of all the user's transactions amounts")
 public class TransactionSum {
-    @ApiModelProperty(value = "The transaction's user")
-    Integer userId;
 
-    @ApiModelProperty(value = "The user's transactions total amount sum", example = "124.45")
-    Double total;
+  @ApiModelProperty(value = "The transaction's user")
+  Integer userId;
+
+  @ApiModelProperty(value = "The user's transactions total amount sum", example = "124.45")
+  Double total;
 }

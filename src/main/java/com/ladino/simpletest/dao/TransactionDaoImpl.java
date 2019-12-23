@@ -16,40 +16,41 @@ import java.util.Optional;
 @Service
 public class TransactionDaoImpl implements TransactionDao {
 
-    Logger logger = LoggerFactory.getLogger(TransactionDaoImpl.class);
+  Logger logger = LoggerFactory.getLogger(TransactionDaoImpl.class);
 
-    @Autowired
-    TransactionRepository transactionRepository;
+  @Autowired
+  TransactionRepository transactionRepository;
 
-    @Override
-    public Transaction addTransaction(Transaction transaction, Integer userId) {
-        String uuid = Utils.generateUUID();
-        //Logged this info since this is not a stateless method
-        logger.info("Persistence of transaction with ID {} for userID {}", uuid, userId);
+  @Override
+  public Transaction addTransaction(Transaction transaction, Integer userId) {
+    String uuid = Utils.generateUUID();
+    //Logged this info since this is not a stateless method
+    logger.info("Persistence of transaction with ID {} for userID {}", uuid, userId);
 
-        transaction.setTransactionId(uuid);
-        transaction.setUserId(userId);
+    transaction.setTransactionId(uuid);
+    transaction.setUserId(userId);
 
-        transactionRepository.save(transaction);
-        return transaction;
-    }
+    transactionRepository.save(transaction);
+    return transaction;
+  }
 
-    @Override
-    public Transaction findByIdAndUserId(String id, Integer userId) {
-        Optional<Transaction> transaction = transactionRepository.findByTransactionIdAndUserId(id, userId);
+  @Override
+  public Transaction findByIdAndUserId(String id, Integer userId) {
+    Optional<Transaction> transaction = transactionRepository
+        .findByTransactionIdAndUserId(id, userId);
 
-        return transaction.orElseThrow(TransactionNotFoundException::new);
-    }
+    return transaction.orElseThrow(TransactionNotFoundException::new);
+  }
 
-    @Override
-    public List<Transaction> findByUserId(Integer userId) {
-        List<Transaction> findByUserId = transactionRepository.findByUserId(userId);
-        return findByUserId;
-    }
+  @Override
+  public List<Transaction> findByUserId(Integer userId) {
+    List<Transaction> findByUserId = transactionRepository.findByUserId(userId);
+    return findByUserId;
+  }
 
-    @Override
-    public TransactionSum findSumOfTransactions(Integer userId) {
-        TransactionSum sum = transactionRepository.sumTransactionsByUser(userId);
-        return sum;
-    }
+  @Override
+  public TransactionSum findSumOfTransactions(Integer userId) {
+    TransactionSum sum = transactionRepository.sumTransactionsByUser(userId);
+    return sum;
+  }
 }

@@ -16,19 +16,19 @@ import java.util.Date;
 @ApiModel(value = "Transaction", description = "Defines a Transaction's amount, date, and description")
 public class Transaction {
 
-    @Id
-    @ApiModelProperty(value = "The transaction's ID", example = "550e8400-e29b-41d4-a716-446655440000")
-    String transactionId;
+  @Id
+  @ApiModelProperty(value = "The transaction's ID", example = "550e8400-e29b-41d4-a716-446655440000")
+  String transactionId;
 
-    @ApiModelProperty(value = "The transaction's amount", example = "124.45")
-    Double amount;
+  @ApiModelProperty(value = "The transaction's amount", example = "124.45")
+  Double amount;
 
-    @ApiModelProperty(value = "The transaction's description", example = "Transaction Description")
-    String description;
+  @ApiModelProperty(value = "The transaction's description", example = "Transaction Description")
+  String description;
 
-    @ApiModelProperty(value = "The transaction's date", example = "2019-12-11")
-    Date date;
+  @ApiModelProperty(value = "The transaction's date", example = "2019-12-11")
+  Date date;
 
-    @ApiModelProperty(value = "The transaction's user")
-    Integer userId;
+  @ApiModelProperty(value = "The transaction's user")
+  Integer userId;
 }

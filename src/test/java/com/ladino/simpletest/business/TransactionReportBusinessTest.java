@@ -62,7 +62,7 @@ public class TransactionReportBusinessTest {
         assertThat(response, Matchers.hasSize(3));
         assertThat(response, Matchers.everyItem(Matchers.hasProperty("userId", Matchers.equalTo(1112))));
         assertThat(response.get(2), Matchers.hasProperty("totalAmount", Matchers.equalTo("225.65")));
-        assertThat(response.get(1), Matchers.hasProperty("endDate", Matchers.equalTo("2019-12-12 Thursday")));
+        assertThat(response.get(1), Matchers.hasProperty("endDate", Matchers.equalTo("2019-12-19 Thursday")));
     }
 
     private Transaction getUnitTestTransaction(Date date, Integer userId, String transactionId) {
