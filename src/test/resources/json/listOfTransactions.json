@@ -1,0 +1,23 @@
+[
+  {
+    "transactionId": "9a5574cb-ba39-48db-bf93-d5b89bbfc0b2",
+    "amount": 11.2,
+    "description": "First Sample Test",
+    "date": "2019-12-17T00:00:00.000+0000",
+    "userId": 1112
+  },
+  {
+    "transactionId": "1c8c03a5-4a89-4a72-965a-8b0f903fc571",
+    "amount": 456.78,
+    "description": "TEST 2",
+    "date": "2019-12-21T16:49:43.939+0000",
+    "userId": 1112
+  },
+  {
+    "transactionId": "e88e0952-856d-4da2-ac17-50dca7a677d2",
+    "amount": 214.45,
+    "description": "Transaction Description",
+    "date": "2019-12-11T00:00:00.000+0000",
+    "userId": 1112
+  }
+]

@@ -106,7 +106,6 @@ public class TransactionDaoImplTest {
         assertEquals(Double.valueOf(99.89), response.getTotal());
     }
 
-
     private Transaction getUnitTestTransaction(Date date, Integer userId, String transactionId) {
         return Transaction.builder().description("UnitTest").amount(123.45D).date(date).userId(userId)
                 .transactionId(transactionId).build();

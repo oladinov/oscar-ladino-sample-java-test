@@ -4,7 +4,6 @@ import com.ladino.simpletest.model.Transaction;
 import com.ladino.simpletest.model.TransactionSum;
 
 import java.util.List;
-import java.util.Map;
 
 public interface TransactionDao {
 
