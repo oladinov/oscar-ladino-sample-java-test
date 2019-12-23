@@ -52,24 +52,6 @@ public class TransactionReportBusinessImpl implements TransactionReportBusiness 
   }
 
     /**
-     * Obtains the first day of the week group. This way, all the transactions that share the
-     * same day, are grouped to form the week report.
-     * @param d The date of the transaction.
-     * @return The first day of the week.
-     */
-  private LocalDate reportGroupByFirstDayOfWeek(Date d) {
-    LocalDate localDate = Utils.DateToLocalDate(d);
-    LocalDate friday = localDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY));
-    LocalDate firstDayOfNextMonth = localDate.with(TemporalAdjusters.firstDayOfNextMonth());
-
-    if (friday.isEqual(firstDayOfNextMonth.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY)))) {
-      return firstDayOfNextMonth;
-    }
-
-    return friday;
-  }
-
-    /**
      * Obtains the total amount of previous week reports, and stores it in current week's report.
      * Then sums the week's amount and adds it to a map to be used for the next week's report.
      * Thus ensuring the amount is not recalculated for every week report.
