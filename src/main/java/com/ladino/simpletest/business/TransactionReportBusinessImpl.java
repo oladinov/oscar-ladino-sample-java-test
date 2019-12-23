@@ -25,9 +25,11 @@ public class TransactionReportBusinessImpl implements TransactionReportBusiness 
     public List<TransactionWeekReport> getReport(Integer userId) {
         List<Transaction> transactionList = transactionDao.findByUserId(userId);
 
-        Map<LocalDate, List<Transaction>> map = transactionList.stream().sorted(Comparator.comparing(Transaction::getDate)).collect(Collectors.groupingBy(t -> Utils.DateToLocalDate(t.getDate()).with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY))));
+        Map<LocalDate, List<Transaction>> map = transactionList.stream().collect(Collectors.groupingBy(t -> Utils.DateToLocalDate(t.getDate()).with(TemporalAdjusters.previousOrSame(DayOfWeek.FRIDAY))));
+        Map<LocalDate, List<Transaction>> orderedMap = map.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 
-        List<TransactionWeekReport> report = map.entrySet().stream().map(x -> getReportFromListOfTransactions(x.getValue())).collect(Collectors.toList());
+        List<TransactionWeekReport> report = orderedMap.entrySet().stream().map(x -> getReportFromListOfTransactions(x.getValue())).collect(Collectors.toList());
 
         final Map<Integer, Double> totalAmountMap = new HashMap<Integer, Double>();
 
@@ -69,6 +71,9 @@ public class TransactionReportBusinessImpl implements TransactionReportBusiness 
     }
 
     private LocalDate getLastDayOfWeekReport(LocalDate dateToLocalDate) {
+        if(dateToLocalDate.getDayOfWeek().equals(DayOfWeek.THURSDAY)) {
+            return dateToLocalDate;
+        }
         LocalDate thursday = dateToLocalDate.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
         LocalDate lastDayOfMonth = dateToLocalDate.with(TemporalAdjusters.lastDayOfMonth());
 
@@ -77,6 +82,9 @@ public class TransactionReportBusinessImpl implements TransactionReportBusiness 
 
 
     private LocalDate getFirstDayOfWeekReport(LocalDate d) {
+        if(d.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
+            return d;
+        }
         LocalDate friday = d.with(TemporalAdjusters.previous(DayOfWeek.FRIDAY));
         LocalDate firstDayOfMonth = d.withDayOfMonth(1);
 
